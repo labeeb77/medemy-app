@@ -1,4 +1,4 @@
-package com.example.medemy_app
+package com.medemyedu.beonlabs
 
 import io.flutter.embedding.android.FlutterActivity
 
