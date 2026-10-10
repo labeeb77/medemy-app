@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../core/auth/session.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/states.dart';
+import '../practice/models.dart';
+import '../practice/practice_screens.dart';
 import 'academic_repository.dart';
 import 'models.dart';
 
@@ -136,7 +138,12 @@ class _UnitSection extends ConsumerWidget {
                   trailing: TextButton(onPressed: () => ref.invalidate(topicsProvider(unit.id)), child: const Text('Retry'))),
               data: (items) => items.isEmpty
                   ? const ListTile(title: Text('No topics published yet'))
-                  : Column(children: [for (final topic in items) TopicRow(topic: topic)]),
+                  : Column(children: [
+                      for (final topic in items) TopicRow(topic: topic),
+                      Padding(padding: const EdgeInsets.fromLTRB(Space.lg, Space.sm, Space.lg, Space.md), child: SizedBox(width: double.infinity, child: OutlinedButton.icon(
+                          onPressed: () => context.push('/practice/setup', extra: PracticeSetup(category: PracticeCategory.unit, contextId: unit.id, contextTitle: unit.title)),
+                          icon: const Icon(Icons.quiz_outlined), label: const Text('Practice this unit')))),
+                    ]),
             ))],
       ),
     );

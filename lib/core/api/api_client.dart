@@ -78,6 +78,16 @@ class ApiClient {
   final Dio _dio;
 
   Future<dynamic> get(String path, {Map<String, dynamic>? query}) => _send(() => _dio.get<dynamic>('/api/v1$path', queryParameters: query));
+  /// A paged list: the items and the cursor for the next page, or null when there are no more.
+  Future<({List<dynamic> items, String? nextCursor})> getPage(String path, {Map<String, dynamic>? query}) async {
+    try {
+      final body = (await _dio.get<dynamic>('/api/v1$path', queryParameters: query)).data as Map;
+      return (items: body['data'] as List<dynamic>, nextCursor: (body['meta'] as Map?)?['nextCursor'] as String?);
+    } on DioException catch (error) {
+      throw ApiFailure.fromDio(error);
+    }
+  }
+
   Future<dynamic> post(String path, [Object? body]) => _send(() => _dio.post<dynamic>('/api/v1$path', data: body ?? const <String, dynamic>{}));
   Future<dynamic> patch(String path, Object body) => _send(() => _dio.patch<dynamic>('/api/v1$path', data: body));
 

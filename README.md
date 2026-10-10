@@ -42,7 +42,8 @@ Tests use fake repositories, so they need neither Firebase nor a running backend
 ## Layout
 
 - `lib/core`: configuration, API client with token refresh, sign-in and session state, routing, theme, shared widgets.
-- `lib/features`: one folder per feature (`auth`, `profile`, `academic`, `topic`, `shell`).
+- `lib/features`: one folder per feature (`auth`, `profile`, `academic`, `topic`, `practice`, `shell`).
 
 Built so far: sign-in with email and password, email verification, profile and semester setup, curriculum browsing,
-and topic content in Learn, Revise and Exam High-Yield. Practice and Progress are placeholders.
+topic content in Learn, Revise and Exam High-Yield, and practice (all seven categories, feedback, results, review and
+history). Progress is a placeholder.

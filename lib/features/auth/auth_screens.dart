@@ -5,23 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../core/api/api_failure.dart';
 import '../../core/auth/identity_provider.dart';
 import '../../core/auth/session.dart';
 import '../../core/routing/app_router.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/widgets/failures.dart';
 import '../../core/widgets/states.dart';
-
-/// Words for a failure the student can do something about.
-String describeFailure(Object error) => switch (error) {
-      IdentityFailure(:final message) => message,
-      ApiFailure(code: 'IDENTITY_CONFLICT') => 'This email is already registered with a different sign-in method. Use that method instead.',
-      ApiFailure(code: 'FIREBASE_UNAVAILABLE') => 'Sign-in is temporarily unavailable. Please try again in a little while.',
-      ApiFailure(status: 429, :final retryAfterSeconds) => 'Too many attempts. Try again${retryAfterSeconds == null ? ' shortly' : ' in $retryAfterSeconds seconds'}.',
-      ApiFailure(status: 403) => 'This account cannot use the student app.',
-      ApiFailure(:final message) => message,
-      _ => 'Something went wrong. Please try again.',
-    };
 
 const onboardingSeenKey = 'medemy.onboardingSeen';
 

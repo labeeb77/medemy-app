@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/auth/session.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/widgets/failures.dart';
 import '../../core/widgets/states.dart';
 import '../academic/academic_repository.dart';
 import '../academic/models.dart';
-import '../auth/auth_screens.dart';
 
 class ProfileSetupScreen extends ConsumerStatefulWidget {
   const ProfileSetupScreen({super.key});

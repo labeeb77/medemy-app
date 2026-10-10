@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/theme/app_theme.dart';
 import '../../core/widgets/states.dart';
+import '../practice/models.dart';
+import '../practice/practice_screens.dart';
 import 'block_renderers.dart';
 import 'models.dart';
 import 'topic_repository.dart';
@@ -29,6 +31,14 @@ class TopicOverviewScreen extends ConsumerWidget {
           Text('Choose how you want to study this topic.', style: context.text.bodyMedium),
           const SizedBox(height: Space.lg),
           for (final mode in ContentMode.values) _ModeCard(topic: topic, mode: mode),
+          Card(child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: Space.lg, vertical: Space.sm),
+            leading: Icon(Icons.quiz_outlined, color: context.scheme.primary),
+            title: Text('Practice', style: context.text.bodyLarge?.copyWith(fontWeight: FontWeight.w600)),
+            subtitle: Text('Questions on this topic, with the reasoning for each answer.', style: context.text.bodyMedium),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.push('/practice/setup', extra: PracticeSetup(category: PracticeCategory.topic, contextId: topic.topicPlacementId, contextTitle: topic.title)),
+          )),
         ]),
       ),
     );
